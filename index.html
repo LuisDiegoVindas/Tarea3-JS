@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="grid">
+        <!-- Div para mostrar el saludo -->
+        <div class="saludo">
+            <h3>Saludo</h3>
+            <div id="output"></div>
+        </div>
+        
+        <!-- Div para mostrar información del carro -->
+        <div class="carro">
+            <h3>Carro</h3>
+            <div id="cars"></div>
+        </div>
+    
+        <!-- Div para mostrar información de la moto -->
+        <div class="moto">
+            <h3>Moto</h3>
+            <div id="moto"></div>
+        </div>
+        
+        <!-- Div para mostrar el resultado de la operación matemática -->
+        <div class="mate">
+            <h3>Mate</h3>
+            <div id="result"></div>
+        </div>
+        
+        <!-- Div para mostrar array de marcas de carros -->
+        <div class="marca">
+            <h3>Marcas</h3>
+            <div id="marcas"></div>
+        </div>
+        
+        <div class="actions">
+            <h3>Array Actions</h3>
+            <button id="a" onclick="autos.push(prompt('Escriba la marca que desea agregar'))">Agregar marca</button>
+            <button id="b" onclick="alert(autos.join(' '))">Mostrar Marcas</button>
+            <button id="c" onclick="autos.pop()">Borrar la última marca</button>
+        </div>
+    </div>
+
+    <!-- Código de JavaScript -->
+    <script>
+        // -----------------
+        // Saludo al usuario
+        // -----------------
+
+        // Solicita el nombre del usuario
+        var nombre = prompt("Escribe tu primer nombre");
+        // Solicita el apellido del usuario
+        var apellido = prompt("Escribe tu apellido");
+        // Solicita la edad del usuario
+        var edad = prompt("Escribe tu edad");
+        // Solicita la fecha de nacimiento del usuario
+        var fecha = prompt("Escribe fecha de nacimiento así dd/mm/yyyy");
+
+        // Función para crear un mensaje de saludo
+        function saludar(n, a, e, f) {
+            // Usando la sintaxis de plantilla de cadena (template string)
+            var adulto = "";
+            if (e >= "18"){
+                adulto = "soy mayor de edad"
+            } else{
+                adulto = "soy menor de edad"
+            }
+
+            var mensaje = `Hola, me llamo ${n} ${a}, nací el ${f} por lo que tengo ${e} años. Esto significa que ${adulto}`;
+
+            // Retorna el mensaje de saludo
+            return mensaje;
+        }
+
+        // Obtener el elemento div con id "output"
+        var outputDiv = document.getElementById("output");
+
+        // Llamar a la función saludar y asignar el resultado al contenido del div
+        outputDiv.innerHTML = saludar(nombre, apellido, edad, fecha);
+
+
+
+        // ----------------------
+        // Objetos Carros y Motos
+        // ----------------------
+
+
+        // Objeto para el carro con 5 atributos
+        const carro = {
+            marca: "BMW",
+            modelo: "ix1",
+            color: "Blanco",
+            año: "2025",
+            placa: "DVV-003"
+        };
+
+        // Objeto para la moto con 3 atributos
+        const moto = {
+            marca: "Yamaha",
+            año:"2024",
+            color: "Azul",
+            requerimiento: "estilazo"
+        };
+
+        // Obtener el elemento div con id "cars"
+        var carDiv = document.getElementById("cars");
+        // Obtener el elemento div con id "moto"
+        var motoDiv = document.getElementById("moto");
+
+        // Crear mensajes con detalles de carro y moto usando template strings
+        var msj = `El carro que desea comprar ${nombre} es un ${carro.marca} ${carro.modelo} del ${carro.año}, además quiere que sea de color ${carro.color} y con placa ${carro.placa}`;
+        var msj2 = `Para poder manejar una ${moto.marca} del ${moto.año} de color ${moto.color} se necesita tener un ${moto.requerimiento}`;
+
+        // Asignar los mensajes a los divs correspondientes
+        carDiv.innerHTML = msj;
+        motoDiv.innerHTML = msj2;
+
+
+
+        // -----------------------
+        // Operaciones matemáticas
+        // -----------------------
+
+
+        // Solicita la operación que el usuariso desea realizar
+        var operacion = prompt("¿Qué operación quiere hacer? (+,-,/,*)");
+        // Solicita el primer número para la operación
+        var num1 = prompt("Ingrese un número");
+        // Solicita el segundo número para la operación
+        var num2 = prompt("Ingrese el segundo número");
+
+        // Variable para almacenar el resultado de la operación
+        var resultado;
+
+        // Realiza la operación matemática según la selección del usuario
+        if (operacion == "+") {
+            resultado = sumar(num1, num2);
+        } else if (operacion == "-") {
+            resultado = restar(num1, num2);
+        } else if (operacion == "*") {
+            resultado = multiplicar(num1, num2);
+        } else if (operacion == "/") {
+            resultado = dividir(num1, num2);
+        } else {
+            // Muestra un mensaje de error si la operación no es válida
+            alert("¡La información ingresada es incorrecta!");
+        }
+
+        // Función para sumar dos números
+        function sumar(n1, n2) {
+            var result = parseFloat(n1) + parseFloat(n2);
+            return result;
+        }
+
+        // Función para restar dos números
+        function restar(n1, n2) {
+            var result = parseFloat(n1) - parseFloat(n2);
+            return result;
+        }
+
+        // Función para multiplicar dos números
+        function multiplicar(n1, n2) {
+            var result = parseFloat(n1) * parseFloat(n2);
+            return result;
+        }
+
+        // Función para dividir dos números
+        function dividir(n1, n2) {
+            var result = parseFloat(n1) / parseFloat(n2);
+            return result;
+        }
+
+        // Obtener el elemento div con id "result"
+        var resultDiv = document.getElementById("result");
+        // Mostrar el resultado de la operación en el div
+        resultDiv.innerHTML = "El resultado es " + resultado;
+
+
+        
+        // --------------------------------------
+        // Array de autos, se agrega más con push
+        // --------------------------------------
+
+
+        // Crear un array de autos
+        const autos = ["Mazda", "BMW", "Honda"];
+
+        var autosDiv = document.getElementById("marcas");
+        autosDiv.innerHTML = autos.join(" ");
+
+        // Añadir un nuevo auto al array
+        // autos.push(prompt("Escriba la marca de autos que desea agregar al array"));
+
+        // Mostrar una alerta con el contenido del array autos
+        // alert(autos);
+
+
+    </script>
+</body>
+
+
+</html>
